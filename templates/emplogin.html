@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      @media only screen and (min-width:900px){
+        .signinBg {
+          background-color: #a1b5eb;
+          background-repeat: no-repeat;
+          background-size: cover;
+          height: 100vh;
+        }
+      }
+    </style>
+    <!-- css  -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% include 'messages.html' %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-4 signinBg py-5">
+          <div class="p-lg-5 pt-5 text-center my-lg-5 py-lg-5 my-3">
+            <p class="text-danger fw-bold fs-3">TASK MANAGEMENT SYSTEM</p>
+            <a href="{% url 'home' %}" class="text-decoration-none">
+              <div class="h6 text-success">
+                Back To Home <i class="fa fa-home"></i>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6 m-auto">
+          <div class="m-md-5 my-lg-5 p-3 mx-3"  style="background-color:#f0f2f9">
+            <div class="mt-lg-5 mx-lg-5">
+              <h4 class="text-dark fw-bold">Employee Sign In</h4>
+              <p>Enter your details below</p>
+            </div>
+            <form class="mx-lg-5 mb-lg-5" method="post" action="{% url 'emplogin' %}">
+              {% csrf_token %}
+
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input
+                  type="text"
+                  id="form1Example1"
+                  class="form-control"
+                  name="empemail"
+                  required
+                />
+                <label class="form-label" for="form1Example1">Email</label>
+              </div>
+
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <input
+                  type="password"
+                  id="form1Example2"
+                  class="form-control"
+                  name="emppassword"
+                  required
+                />
+                <label class="form-label" for="form1Example2">Password</label>
+              </div>
+
+              <!-- 2 column grid layout for inline styling -->
+              <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <!-- Checkbox -->
+                  <div class="">
+                    <!-- Submit button -->
+                    <button
+                      class="text-light px-5 py-2 border-0 rounded-1 shopNowbtn shadow-lg bg-primary"
+                    >
+                      Sign In
+                    </button>
+                  </div>
+                  <div class="">
+                    <!-- Simple link -->
+                    <a href="#!">Forgot password?</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
+    ></script>
+  </body>
+</html>

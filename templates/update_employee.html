@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Material Design for Bootstrap</title>
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    {% include 'messages.html' %}
+    <!--Main Navigation-->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Navbar brand -->
+          <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'dashboard' %}">
+            <img
+              src="https://cdn3.f-cdn.com/contestentries/1733723/42113248/5e47d289f1335_thumb900.jpg"
+              class="w-100"
+              height="90"
+              alt="MDB Logo"
+              loading="lazy"
+            />
+          </a>
+          <a href="{% url 'home' %}" class="text-decoration-none">
+            <div class="h5 mt-3 text-success">
+              Back To Home <i class="fa fa-home"></i>
+            </div>
+          </a>
+          <!-- Left links -->
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add_employee' %}"
+                >Add Employee</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add_task' %}">Add Task</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'task_history' %}"
+                >Task History</a
+              >
+            </li>
+          </ul>
+          <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+          <!-- Avatar -->
+          <div class="dropdown me-4">
+            <a
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuAvatar"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                class="rounded-circle"
+                height="25"
+                alt="Black and White Portrait of a Man"
+                loading="lazy"
+              />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuAvatar"
+            >
+              <li>
+                <a class="dropdown-item" href="{% url 'profile' %}"
+                  >My profile</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Settings</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'admin_logout' %}"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Right elements -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+    <!--Main Navigation-->
+    <div class="mx-lg-5 px-lg-5">
+      <div class="mx-lg-5 px-lg-5">
+        <form
+          class="my-5 mx-lg-5 px-lg-5 mx-3"
+          method="post"
+          action="{% url 'update_employee' employee.id %}"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+
+          <!-- Email input -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-outline mb-4">
+                <input
+                  type="text"
+                  id="form1Example1"
+                  class="form-control"
+                  name="emp_name"
+                  value="{{employee.emp_name}}"
+                />
+                <label class="form-label" for="form1Example1">Name</label>
+              </div>
+            </div>
+            <!-- Password input -->
+            <div class="col-md-6">
+              <div class="form-outline mb-4">
+                <input
+                  type="Email"
+                  id="form1Example2"
+                  class="form-control"
+                  name="email"
+                  value="{{employee.email}}"
+                  readonly
+                />
+                <label class="form-label" for="form1Example2">Email</label>
+              </div>
+            </div>
+          </div>
+          <!-- Password input -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-outline mb-4">
+                <input
+                  type="password"
+                  id="form1Example2"
+                  class="form-control"
+                  name="password"
+                  value={{employee.password}}
+                  readonly
+                />
+                <label class="form-label" for="form1Example2">Password</label>
+              </div>
+            </div>
+            <!-- Password input -->
+            <div class="col-md-6">
+              <div class="form-outline mb-4">
+                <input
+                  type="text"
+                  id="form1Example2"
+                  class="form-control"
+                  name="mobile"
+                  value="{{employee.mobile}}"
+                />
+                <label class="form-label" for="form1Example2">Mobile</label>
+              </div>
+            </div>
+          </div>
+          <!-- Password input -->
+          
+          <!-- Password input -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-outline mb-4">
+                <input
+                  type="text"
+                  id="form1Example2"
+                  class="form-control"
+                  name="post"
+                  value="{{employee.post}}"
+                />
+                <label class="form-label" for="form1Example2">Post</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-outline mb-4">
+                <input
+                  type="text"
+                  id="form1Example2"
+                  class="form-control"
+                  name="blood_group"
+                  value="{{employee.blood_group}}"
+                />
+                <label class="form-label" for="form1Example2"
+                  >Blood Group</label
+                >
+              </div>
+            </div>
+          </div>
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form1Example2"
+              class="form-control"
+              name="address"
+              value="{{employee.address}}"
+            />
+            <label class="form-label" for="form1Example2">Address</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="file"
+              id="form1Example2"
+              class="form-control"
+              name="image"
+              value="{{employee.image.url}}"
+              required
+            />
+          </div>
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary btn-block">Update</button>
+        </form>
+      </div>
+    </div>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
+    ></script>
+  </body>
+</html>

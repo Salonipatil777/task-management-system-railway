@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Material Design for Bootstrap</title>
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    {% include 'messages.html' %}
+    <!--Main Navigation-->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Navbar brand -->
+          <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'dashboard' %}">
+            <img
+              src="https://cdn3.f-cdn.com/contestentries/1733723/42113248/5e47d289f1335_thumb900.jpg"
+              class="w-100"
+              height="90"
+              alt="MDB Logo"
+              loading="lazy"
+            />
+          </a>
+          <a href="{% url 'home' %}" class="text-decoration-none">
+            <div class="h5 mt-3 text-success">
+              Back To Home <i class="fa fa-home"></i>
+            </div>
+          </a>
+          <!-- Left links -->
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add_employee' %}"
+                >Add Employee</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add_task' %}">Add Task</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'task_history' %}"
+                >Task History</a
+              >
+            </li>
+          </ul>
+          <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+          <!-- Avatar -->
+          <div class="dropdown me-4">
+            <a
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuAvatar"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                class="rounded-circle"
+                height="25"
+                alt="Black and White Portrait of a Man"
+                loading="lazy"
+              />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuAvatar"
+            >
+              <li>
+                <a class="dropdown-item" href="{% url 'admin_profile' %}"
+                  >My profile</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'admin_logout' %}"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Right elements -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <div class="mx-lg-5 m-3">
+      <div class="row row-cols-lg-6 row-cols-md-3 row-cols-1 g-4 mt-4">
+        <div class="col text-center text-light fw-bold">
+          <div class="bg-info mb-0 pb-1">
+            <h5 class="pt-2 px-2">Assigned Task</h5>
+            <p class="text-center mb-1">({{assigned_tasks.count}})</p>
+          </div>
+        </div>
+        <div class="col text-center text-light fw-bold">
+          <div class="bg-success mb-0 pb-1">
+            <h5 class="pt-2 px-2">Completed Task</h5>
+            <p class="text-center mb-1">({{completed_tasks.count}})</p>
+          </div>
+        </div>
+        <div class="col text-center text-light fw-bold">
+          <div class="bg-warning mb-0 pb-1">
+            <h5 class="pt-2 px-2">Pending Task</h5>
+            <p class="text-center mb-1">({{pending_tasks.count}})</p>
+          </div>
+        </div>
+        <div class="col text-center text-light fw-bold">
+          <div class="bg-danger mb-0 pb-1">
+            <h5 class="pt-2 px-2">Canceled Task</h5>
+            <p class="text-center mb-1">({{cancel_tasks.count}})</p>
+          </div>
+        </div>
+        <div class="col text-center text-light fw-bold">
+          <div class="col bg-dark mb-0 pb-1">
+            <h5 class="pt-2 px-2">Delay Task</h5>
+            <p class="text-center mb-1">({{delay_tasks.count}})</p>
+          </div>
+        </div>
+        <div class="col text-center text-light fw-bold">
+          <div class="bg-primary mb-0 pb-1">
+            <h5 class="pt-2 px-2">Reassigned Task</h5>
+            <p class="text-center mb-1">({{reassign_tasks.count}})</p>
+          </div>
+        </div>
+      </div>
+      <div class="my-4 me-lg-5 pe-lg-5">
+        <form
+          class="input-group rounded w-75"
+          method="get"
+          action="{% url 'search_tasks' %}"
+        >
+          <input
+            type="search"
+            class="form-control rounded"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="search-addon"
+            name="query"
+            id="search_tasks"
+          />
+          <button
+            class="btn border-1 mx-3 p-2 px-3 bg-primary text-light rounded"
+            type="submit"
+          >
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-responsive align-middle mb-0 bg-white">
+          {% if tsk|length == 0 %}
+          <h3 class="text-danger">No search results..</h3>
+          Your search -
+          <b>{{query}}</b>
+          - did not match. - {% else %}
+          <thead class="bg-light">
+            <tr>
+              <th>Employee_ID</th>
+              <th>Employee_Name</th>
+              <th>Tasks_to_Employee</th>
+              <th>Target_Date</th>
+              <th>Status</th>
+              <th>Update Status</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in tsk %}
+            <tr>
+              <td>
+                <p class="fw-normal mb-1">{{i.id}}</p>
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+                  {% comment %}
+                  <img
+                    src="https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg?w=360"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                  />
+                  {% endcomment %}
+                  <div class="ms-3">
+                    <p class="fw-bold mb-1">{{i.assigned_to}}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <p class="fw-normal mb-1">{{i.given_task}}</p>
+              </td>
+              <td>
+                <span class="badge bg-success d-inline">{{i.target_date}}</span>
+              </td>
+
+              <form
+                class="my-5 mx-lg-5 px-lg-5 mx-3"
+                method="post"
+                action="{% url 'update_status' i.id %}"
+                enctype="multipart/form-data"
+              >
+                {% csrf_token %}
+                <td>
+                  <select
+                    class="form-select"
+                    id="selectemp"
+                    aria-label="Default select example"
+                    name="status"
+                  >
+                    {% if i.status == "Assign" %}
+                    <option value="Assign" selected>Assign</option>
+                    {% else %}
+                    <option value="Assign">Assign</option>
+                    {% endif %} {% if i.status == "Complete" %}
+                    <option value="Complete" selected>Complete</option>
+                    {% else %}
+                    <option value="Complete">Complete</option>
+                    {% endif %} {% if i.status == "Pending" %}
+                    <option value="Pending" selected>Pending</option>
+                    {% else %}
+                    <option value="Pending">Pending</option>
+                    {% endif %} {% if i.status == "Cancel" %}
+                    <option value="Cancel" selected>Cancel</option>
+                    {% else %}
+                    <option value="Cancel">Cancel</option>
+                    {% endif %} {% if i.status == "Delay" %}
+                    <option value="Delay" selected>Delay</option>
+                    {% else %}
+                    <option value="Delay">Delay</option>
+                    {% endif %} {% if i.status == "Reassign" %}
+                    <option value="Reassign" selected>Reassign</option>
+                    {% else %}
+                    <option value="Reassign">Reassign</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <button class="btn btn-success" type="submit">Update</button>
+                </td>
+              </form>
+              <td>
+                <a href="{% url 'home_room' i.id %}">
+                  <button
+                    type="button"
+                    class="btn btn-sm rounded-pill btn-primary text-light"
+                  >
+                    Message
+                  </button>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          {% endif %}
+        </table>
+      </div>
+    </div>
+    <!--Main layout-->
+
+    <!--Main layout-->
+    <!-- MDB -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
+    ></script>
+  </body>
+</html>

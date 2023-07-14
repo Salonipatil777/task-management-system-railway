@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      table td,
+      table th {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Material Design for Bootstrap</title>
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    {% include 'messages.html' %}
+    <!--Main Navigation-->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Navbar brand -->
+          <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'mytasks' %}">
+            <img
+              src="https://previews.123rf.com/images/glopphy/glopphy1511/glopphy151100012/47791517-teamwork-workers-and-employees-in-a-meeting-logo-vector-image.jpg"
+              class="w-100"
+              height="75"
+              alt="MDB Logo"
+              loading="lazy"
+            />
+          </a>
+          <a href="{% url 'home' %}" class="text-decoration-none">
+            <div class="h5 mt-3 text-success mx-3">
+              Back To Home <i class="fa fa-home"></i>
+            </div>
+          </a>
+
+          <!-- Left links -->
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              Welocome to Your profile
+              <span class="h5 fw-bold mx-2 text-success">{{employee}}</span>
+            </li>
+          </ul>
+          <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+          <!-- Avatar -->
+          <div class="dropdown me-4">
+            <a
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuAvatar"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="{{employee.image.url}}"
+                class="rounded-circle"
+                height="25"
+                alt="Black and White Portrait of a Man"
+                loading="lazy"
+              />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuAvatar"
+            >
+              <li>
+                <a class="dropdown-item" href="{% url 'userprofile' %}"
+                  >My profile</a
+                >
+              </li>
+              {% comment %}
+              <li>
+                <a class="dropdown-item" href="#">Settings</a>
+              </li>
+              {% endcomment %} {% if user.is_authenticated %}
+              <li>
+                <a class="dropdown-item" href="{% url 'emplogout' %}">Logout</a>
+              </li>
+              {% else %}
+              <li>
+                <a class="dropdown-item" href="#">Login</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+        <!-- Right elements -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+    <!--Main Navigation-->
+    <div class="m-lg-5 m-3">
+      <div class="table-responsive">
+        <table class="table table-responsive align-middle mb-0 bg-white">
+          <thead class="bg-light">
+            <tr>
+              <th>Employee ID</th>
+              <th>Employee Name</th>
+              <th>Task</th>
+              <th>Target Date</th>
+              <th>Status</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in mytaskpage.object_list %}
+            <tr>
+              <td>
+                <p class="fw-normal mb-1">{{i.id}}</p>
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img
+                    src="https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg?w=360"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                  />
+                  <div class="ms-3">
+                    <p class="fw-bold mb-1">{{i.employee_name}}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <a href="{% url 'taskpage' i.id %}" class='text-secondary'><p class="fw-normal mb-1">{{i.given_task}}</p></a>
+              </td>
+              <td>
+                <span class="badge bg-success d-inline">{{i.target_date}}</span>
+              </td>
+              <td class='text-secondary fw-bold'>{{i.status}}</td>
+              <td>
+                <a href="{% url 'home_room2' i.id %}">
+                  <button
+                    type="button"
+                    class="btn btn-sm rounded-pill btn-primary text-light"
+                  >
+                    Message
+                  </button>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <nav aria-label="Page navigation example" class="my-3">
+        <ul class="pagination d-flex justify-content-center">
+          <li class="page-item mx-1">
+            {% if mytaskpage.has_previous %}
+            <a
+              class="page-link"
+              href="{% url 'mytasks' %}?mytaskpage={{mytaskpage.previous_page_number}}"
+              aria-label="Previous"
+            >
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+            {% endif %}
+          </li>
+          {% for num_page in mytaskpage.paginator.page_range %}
+          <br />
+          {% if mytaskpage.number == num_page %}
+          <li class="page-item active mx-1">
+            <a
+              class="page-link"
+              href="{% url 'mytasks' %}?mytaskpage={{num_page}}"
+              >{{num_page}}</a
+            >
+          </li>
+          {% else %}
+          <li class="page-item mx-1">
+            <a
+              class="page-link"
+              href="{% url 'mytasks' %}?mytaskpage={{num_page}}"
+              >{{num_page}}</a
+            >
+          </li>
+
+          {% endif %}
+          <br />
+          {% endfor %}
+          <li class="page-item">
+            {% if mytaskpage.has_next %}
+            <a
+              class="page-link"
+              href="{% url 'mytasks' %}?mytaskpage={{mytaskpage.next_page_number}}"
+              aria-label="Next"
+            >
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+            {% endif %}
+          </li>
+        </ul>
+        <p class="text-center">
+          page {{mytaskpage.number}}/{{mytaskpage.paginator.num_pages}}
+        </p>
+      </nav>
+    </div>
+    <!--Main layout-->
+
+    <!--Main layout-->
+    <!-- MDB -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
+    ></script>
+  </body>
+</html>

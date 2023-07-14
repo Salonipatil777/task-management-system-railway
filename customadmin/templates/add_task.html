@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Material Design for Bootstrap</title>
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    {% include 'messages.html' %}
+    <!--Main Navigation-->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Navbar brand -->
+          <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'dashboard' %}">
+            <img
+              src="https://cdn3.f-cdn.com/contestentries/1733723/42113248/5e47d289f1335_thumb900.jpg"
+              class="w-100"
+              height="90"
+              alt="MDB Logo"
+              loading="lazy"
+            />
+          </a>
+          <a href="{% url 'home' %}" class="text-decoration-none">
+            <div class="h5 mt-3 text-success">
+              Back To Home <i class="fa fa-home"></i>
+            </div>
+          </a>
+          <!-- Left links -->
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add_employee' %}"
+                >Add Employee</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add_task' %}">Add Task</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'task_history' %}"
+                >Task History</a
+              >
+            </li>
+          </ul>
+          <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+          <!-- Avatar -->
+          <div class="dropdown me-4">
+            <a
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuAvatar"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                class="rounded-circle"
+                height="25"
+                alt="Black and White Portrait of a Man"
+                loading="lazy"
+              />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuAvatar"
+            >
+              <li>
+                <a class="dropdown-item" href="{% url 'admin_profile' %}"
+                  >My profile</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'admin_logout' %}"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Right elements -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+    <!--Main Navigation-->
+    <div class="m-5">
+      <div class="mx-lg-5 px-lg-5">
+        <div class="mx-lg-5 px-lg-5">
+          <form
+            class="my-5 mx-lg-5 px-lg-5 mx-3"
+            method="post"
+            action="{% url 'add_task' %}"
+          >
+            {% csrf_token %}
+
+            <!-- Email input -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-outline mb-4">
+                  <label mdbLabel class="form-label" for="selectemp"
+                    >Employee</label
+                  >
+                  <select
+                    class="form-select"
+                    id="selectemp"
+                    aria-label="Default select example"
+                    name="assigned_to"
+                  >
+                    {% for i in emp %}
+                    <option selected>{{i.email}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-4">
+                  <mdb-form-control>
+                    <label mdbLabel class="form-label" for="form1"
+                      >employee_name</label
+                    >
+                    <input
+                      mdbInput
+                      type="text"
+                      id="form1"
+                      class="form-control"
+                      name="employee_name"
+                    />
+                  </mdb-form-control>
+                </div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <mdb-form-control>
+                <label mdbLabel class="form-label" for="form1">Task</label>
+                <input
+                  mdbInput
+                  type="text"
+                  id="form1"
+                  class="form-control"
+                  name="given_task"
+                />
+              </mdb-form-control>
+            </div>
+
+            <div class="mb-4">
+              <!-- Email input -->
+              <mdb-form-control>
+                <label mdbLabel class="form-label" for="form1"
+                  >Task Description</label
+                >
+                <textarea
+                  mdbValidate
+                  mdbInput
+                  type="text"
+                  id="form1"
+                  class="form-control"
+                  formControlName="textarea"
+                  name="task_description"
+                  required
+                ></textarea>
+              </mdb-form-control>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-4">
+                  <!-- Password input -->
+                  <mdb-form-control>
+                    <label mdbLabel class="form-label" for="form1"
+                      >Target date</label
+                    >
+                    <input
+                      mdbInput
+                      type="date"
+                      id="form1"
+                      class="form-control"
+                      name="target_date"
+                    />
+                  </mdb-form-control>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-outline mb-4">
+                  <label mdbLabel class="form-label" for="selectemp"
+                    >Status</label
+                  >
+                  <select
+                    class="form-select"
+                    id="selectemp"
+                    aria-label="Default select example"
+                    name="status"
+                  >
+                    <option selected>Assign</option>
+                    <option>Complete</option>
+                    <option>Pending</option>
+                    <option>Cancel</option>
+                    <option>Delay</option>
+                    <option>Reassign</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--Main layout-->
+
+    <!--Main layout-->
+    <!-- MDB -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
+    ></script>
+  </body>
+</html>

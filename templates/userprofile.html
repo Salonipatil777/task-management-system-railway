@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Material Design for Bootstrap</title>
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!--Main Navigation-->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Navbar brand -->
+          <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'mytasks' %}">
+            <img
+              src="https://previews.123rf.com/images/glopphy/glopphy1511/glopphy151100012/47791517-teamwork-workers-and-employees-in-a-meeting-logo-vector-image.jpg"
+              class="w-100"
+              height="75"
+              alt="MDB Logo"
+              loading="lazy"
+            />
+          </a>
+          <a href="{% url 'home' %}" class="text-decoration-none">
+            <div class="h5 mt-3 text-success mx-3">
+              Back To Home <i class="fa fa-home"></i>
+            </div>
+          </a>
+          <!-- Left links -->
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item me-3">
+              <a class="nav-link" href="{% url 'mytasks' %}">My Tasks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark"
+                >Welocome to Your profile
+                <span class="h5 fw-bold mx-2 text-success"
+                  >{{employee}}</span
+                ></a
+              >
+            </li>
+          </ul>
+          <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+          <!-- Avatar -->
+          <div class="dropdown me-4">
+            <a
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuAvatar"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="{{employee.image.url}}"
+                class="rounded-circle"
+                height="25"
+                alt="Black and White Portrait of a Man"
+                loading="lazy"
+              />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuAvatar"
+            >
+              <li>
+                <a class="dropdown-item" href="{% url 'userprofile' %}"
+                  >My profile</a
+                >
+              </li>
+              {% comment %}
+              <li>
+                <a class="dropdown-item" href="#">Settings</a>
+              </li>
+              {% endcomment %} {% if user.is_authenticated %}
+              <li>
+                <a class="dropdown-item" href="{% url 'emplogout' %}">Logout</a>
+              </li>
+              {% else %}
+              <li>
+                <a class="dropdown-item" href="#">Login</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+        <!-- Right elements -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+    <!--Main Navigation-->
+    <div class="m-lg-5 m-3">
+      <section style="background-color: #eee">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <img
+                    src="{{employee.image.url}}"
+                    alt="avatar"
+                    class="rounded-circle img-fluid"
+                    style="width: 150px !important; height: 150px !important"
+                  />
+                  <h5 class="my-3">{{employee.emp_name}}</h5>
+                  <p class="text-muted mb-1">{{employee.post}}</p>
+                  <p class="text-muted mb-4">{{employee.address}}</p>
+                  {% comment %}
+                  <div class="d-flex justify-content-center mb-2">
+                    <button type="button" class="btn btn-primary">
+                      Follow
+                    </button>
+                    <button type="button" class="btn btn-outline-primary ms-1">
+                      Message
+                    </button>
+                  </div>
+                  {% endcomment %}
+                </div>
+              </div>
+              <div class="card mb-4 mb-lg-0 py-1">
+                <div class="card-body p-0">
+                  <ul class="list-group list-group-flush rounded-3">
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center p-3"
+                    >
+                      <i class="fas fa-envelope fa-lg text-warning"></i>
+                      <a href="{{employee.email}}"><p class="mb-0">{{employee.email}}</p></a>
+                    </li>
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center p-3"
+                    >
+                      <i class="fas fa-phone fa-lg text-success"></i>
+                      <p class="mb-0">{{employee.mobile}}</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Full Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{employee.emp_name}}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{employee.email}}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Mobile</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{employee.mobile}}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Address</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{employee.address}}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Date of Birth</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{employee.date_of_birth}}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Date of join</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{employee.date_of_join}}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Post</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{employee.post}}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Blood group</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{employee.blood_group}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!--Main layout-->
+
+    <!--Main layout-->
+    <!-- MDB -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
+    ></script>
+  </body>
+</html>
