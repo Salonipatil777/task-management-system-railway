@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-^4&%2_j!5+ypa_3hf^%5yma5jpu!l-40+o^f^8cvc52cumt8n7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['web-production-7c0b.up.railway.app','127.0.0:1']
+ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['web-production-7c0b.up.railway.app']
 
 
@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': 'railway',
         'USER': 'postgres',
         'PASSWORD': 'vnWNJ9BsHfm6KmyvFJ3i',
-        'HOST': 'web-production-7c0b.up.railway.app',
+        'HOST': 'containers-us-west-48.railway.app',
         'PORT': '6784'
     }
 }
