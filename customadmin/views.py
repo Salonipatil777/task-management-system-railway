@@ -16,7 +16,6 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def admin_login(request):
-        try:
         if request.user.is_authenticated:
             return redirect('dashboard')
         if request.method == 'POST':
@@ -34,8 +33,6 @@ def admin_login(request):
             message.info(request,'invalid password')
             return redirect('admin')
         return render(request,'login.html')
-    except Exception as e:
-        print(e)
 
 @login_required(login_url='admin_login')
 def admin_logout(request):
