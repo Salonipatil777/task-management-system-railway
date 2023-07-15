@@ -30,7 +30,7 @@ def admin_login(request):
                 login(request, user_obj)
                 messages.success(request,'admin login successfully')
                 return redirect('dashboard')
-            message.info(request,'invalid password')
+            messages.info(request,'invalid password')
             return redirect('admin')
         return render(request,'login.html')
 
