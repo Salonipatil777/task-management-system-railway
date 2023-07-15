@@ -37,12 +37,13 @@ def admin_login(request):
     except Exception as e:
         print(e)
 
-# @login_required(login_url='admin_login')
+@login_required(login_url='admin_login')
 def admin_logout(request):
     logout(request)
     messages.success(request,"successfully logged out")
     return redirect('admin_login')
 
+@login_required(login_url='admin_login')
 def dashboard(request):
     employee = Employee.objects.all().order_by('id')[0:5]
     context = {
@@ -51,7 +52,7 @@ def dashboard(request):
 
     return render(request,'dashboard.html',context)
 
-# @login_required(login_url='admin_login')
+@login_required(login_url='admin_login')
 def add_task(request):
     emp = Employee.objects.all().order_by('id')[0:5]
     if request.method == 'POST':
@@ -86,7 +87,7 @@ def add_task(request):
 
     return render(request,'add_task.html',context)
 
-# @login_required(login_url='admin_login')
+@login_required(login_url='admin_login')
 def task_history(request):
     tasks = Task.objects.all().order_by('-id')
     assigned_tasks = Task.objects.filter(status='Assign')
@@ -114,7 +115,7 @@ def task_history(request):
 
     return render(request,'task_history.html',context)
 
-# @login_required(login_url='admin_login')
+@login_required(login_url='admin_login')
 def add_employee(request):
     if request.method == 'POST':
         emp_name = request.POST.get('emp_name')
@@ -170,7 +171,7 @@ def add_employee(request):
 
     return render(request,'add_employee.html')
 
-# @login_required(login_url='admin_login')
+@login_required(login_url='admin_login')
 def search_employee(request):
     query = request.GET.get('query')
     if len(query)>50:
@@ -192,7 +193,7 @@ def home_room(request ,emp_name):
     }
     return render(request,'home_room.html',context)
 
-# @login_required(login_url='admin_login')
+@login_required(login_url='admin_login')
 def room(request, room):
     username = request.GET.get('username')
     room_details = Room.objects.get(name=room)
