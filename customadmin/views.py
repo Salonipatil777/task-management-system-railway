@@ -29,7 +29,7 @@ def admin_login(request):
             if user_obj and user_obj.is_superuser:
                 login(request, user_obj)
                 messages.success(request,'admin login successfully')
-                return redirect('/admin/dashboard/')
+                return redirect('dashboard')
         return render(request,'login.html')
 
 @login_required(login_url='admin_login')
