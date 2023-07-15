@@ -31,7 +31,7 @@ def admin_login(request):
                 messages.success(request,'admin login successfully')
                 return redirect('dashboard')
             messages.info(request,'invalid password')
-            return redirect('')
+            return redirect('/')
         return render(request,'login.html')
 
 @login_required(login_url='admin_login')
