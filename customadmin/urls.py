@@ -6,9 +6,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     
-    path('', admin_login,name='admin_login'),
+    path('', dashboard,name='dashboard'),
     path('admin_logout/', admin_logout,name='admin_logout'),
-    path('dashboard/', dashboard,name='dashboard'),
+    # path('dashboard/', dashboard,name='dashboard'),
     path('admin_profile/', admin_profile,name='admin_profile'),
     path('add_task/',add_task,name='add_task'),
     path('task_history/',task_history,name='task_history'),
