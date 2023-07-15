@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+import dj_database_url
+
+DATABASE_URL = 'postgres://postgres:d7R8y1uoCRvIwljjVfVQ@containers-us-west-10.railway.app:7375/railway'
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,16 +30,7 @@ SECRET_KEY = 'django-insecure-^4&%2_j!5+ypa_3hf^%5yma5jpu!l-40+o^f^8cvc52cumt8n7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-CORS_ALLOWED_ORIGINS = [
-    'https://web-production-7c0b.up.railway.app/',
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    'https://web-production-7c0b.up.railway.app/'
-]
-
-
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh','127.0.0.1']
 
 # Application definition
 
@@ -92,17 +87,21 @@ WSGI_APPLICATION = 'admintasks.wsgi.application'
 #     }
 # }
 
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'd7R8y1uoCRvIwljjVfVQ',
-        'HOST': 'containers-us-west-10.railway.app',
-        'PORT': '7375'
-    }
+    "default":dj_database_url.config(default=DATABASE_URL,conn_max_age=1800)
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': 'd7R8y1uoCRvIwljjVfVQ',
+#         'HOST': 'containers-us-west-10.railway.app',
+#         'PORT': '7375'
+#     }
+# }
 
 
 # Password validation
