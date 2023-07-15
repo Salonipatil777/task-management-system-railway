@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_WHITELIST = [
-    'https://web-production-7c0b.up.railway.app',
+    'web-production-7c0b.up.railway.app',
     # Add other trusted origins if needed
 ]
 
