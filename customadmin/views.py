@@ -17,8 +17,8 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def admin_login(request):
     try:
-        # if request.user.is_authenticated:
-        #     return redirect('/admin/dashboard/')
+        if request.user.is_authenticated:
+            return redirect('/admin/dashboard/')
         if request.method == 'POST':
             username=request.POST.get('username')
             password=request.POST.get('password')
