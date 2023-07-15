@@ -43,7 +43,6 @@ def admin_logout(request):
     messages.success(request,"successfully logged out")
     return redirect('admin_login')
 
-@login_required(login_url='admin_login')
 def dashboard(request):
     employee = Employee.objects.all().order_by('id')[0:5]
     context = {
