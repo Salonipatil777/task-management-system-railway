@@ -16,8 +16,9 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def admin_login(request):
-        if request.user.is_authenticated:
-            return redirect('dashboard')
+    try:
+        # if request.user.is_authenticated:
+        #     return redirect('/admin/dashboard/')
         if request.method == 'POST':
             username=request.POST.get('username')
             password=request.POST.get('password')
@@ -29,10 +30,12 @@ def admin_login(request):
             if user_obj and user_obj.is_superuser:
                 login(request, user_obj)
                 messages.success(request,'admin login successfully')
-                return redirect('dashboard')
-            messages.info(request,'invalid password')
+                return redirect('/admin/dashboard/')
+            message.info(request,'invalid password')
             return redirect('/')
         return render(request,'login.html')
+    except Exception as e:
+        print(e)
 
 @login_required(login_url='admin_login')
 def admin_logout(request):
@@ -256,6 +259,8 @@ def update_employee(request,id):
         address = request.POST.get('address')
         blood_group = request.POST.get('blood_group')
         image = request.FILES.get('image')
+        date_of_join = request.POST.get('date_of_join')
+        date_of_birth = request.POST.get('date_of_birth')
 
 
         ctx = {
@@ -288,7 +293,9 @@ def update_employee(request,id):
             post=post,
             address=address,
             image=image,
-            blood_group=blood_group,)
+            blood_group=blood_group,
+            date_of_join = date_of_join,
+            date_of_birth = date_of_birth)
         employee.save()
         user.save()
         messages.success(request, "Employee update successfully")
