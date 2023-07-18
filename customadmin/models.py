@@ -12,8 +12,8 @@ class Employee(models.Model):
     email=models.EmailField(max_length=100)
     password = models.CharField(max_length=100)
     mobile = models.CharField(max_length=10)
-    date_of_join=models.DateField(auto_now_add=False ,null=True,blank=True)
-    date_of_birth = models.DateField(auto_now_add=False ,null=True,blank=True)
+    date_of_join=models.DateTimeField(blank=True, null=True)
+    date_of_birth =models.DateTimeField(blank=True, null=True)
     post=models.CharField(max_length=100)
     address=models.CharField(max_length=500)
     blood_group=models.CharField(max_length=10)
@@ -46,9 +46,7 @@ class Room(models.Model):
     
 class Message(models.Model):
     value = models.CharField(max_length=1000000)
-    datetime = models.DateTimeField(default=datetime.now, blank=True)
-    date = models.DateField(auto_now_add=True, blank=True)
-    time = models.TimeField(auto_now=True, blank=True)
+    date = models.DateTimeField(default=datetime.now, blank=True)
     user = models.CharField(max_length=1000000)
     room = models.CharField(max_length=1000000)
 
