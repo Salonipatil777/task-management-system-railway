@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Task Management System</title>
+    <title>Material Design for Bootstrap</title>
     <!-- Font Awesome -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -111,9 +111,9 @@
                   >My profile</a
                 >
               </li>
-              <li>
+              {% comment %} <li>
                 <a class="dropdown-item" href="#">Settings</a>
-              </li>
+              </li> {% endcomment %}
               <li>
                 <a class="dropdown-item" href="{% url 'admin_logout' %}"
                   >Logout</a
@@ -196,6 +196,32 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-outline mb-4">
+                <input
+                  id="form1Example2"
+                  class="form-control"
+                  type="date" 
+                  name="date_of_birth" value="{{ user_profile.date_of_birth|date:'mm/dd/yyyy' }}"
+                />
+                <label class="form-label" for="form1Example2">Date of birth</label>
+              </div>
+            </div>
+            <!-- Password input -->
+            <div class="col-md-6">
+              <div class="form-outline mb-4">
+                <input
+                  type="date"
+                  id="form1Example2"
+                  class="form-control"
+                  name="date_of_join"
+                  value="{{employee.date_of_join}}"
+                />
+                <label class="form-label" for="form1Example2">Date of join</label>
+              </div>
+            </div>
+          </div>
           <!-- Password input -->
           
           <!-- Password input -->
@@ -244,7 +270,7 @@
               id="form1Example2"
               class="form-control"
               name="image"
-              value="{{employee.image.url}}"
+              value="{{employee.image}}"
               required
             />
           </div>
