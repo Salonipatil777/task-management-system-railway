@@ -52,7 +52,6 @@ def emplogin(request):
             return redirect('emplogin')
     return render(request,'emplogin.html')
 
-
 @login_required(login_url='emplogin')
 def mytasks(request):
     user = get_object_or_404(User, email=request.user.email)
@@ -71,9 +70,6 @@ def taskpage(request,id):
     employee = get_object_or_404(Employee, user=user)
     tasks = Task.objects.filter(id=id).order_by('-id')
     return render(request, 'taskpage.html',{'tasks':tasks,'employee':employee})
-
-
-
 
 @login_required(login_url='emplogin')
 def home_room2(request,emp_name):
