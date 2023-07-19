@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Task Management System</title>
+    <title>Material Design for Bootstrap</title>
     <!-- Font Awesome -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -25,7 +25,7 @@
     />
   </head>
 
-  <body style='background-color:#f0f2f9'>
+  <body style="background-color: #f0f2f9">
     {% include 'messages.html' %}
     <!--Main Navigation-->
     <!-- Navbar -->
@@ -132,17 +132,26 @@
       </h1>
       <div class="my-3">
         <p class="h5 text-danger fw-bold">Description -</p>
-        <p class="h5" style='text-align:justify'>{{task.task_description}}</p>
+        <p class="h5" style="text-align: justify">{{task.task_description}}</p>
+        <a
+          href="{{task.image.url}}"
+          class="mt-4 text-light text-decoration-none btn btn-primary"
+          alt="Black and White Portrait of a Man"
+          loading="lazy"
+          target="_blank"
+        >
+          View Attachment</a
+        >
       </div>
       <div class="d-flex">
-      <div class="my-3 me-3">
-        <p class="h5 text-secondary fw-bold">Created date</p>
-        <p class="h5">{{task.created_date}}</p>
-      </div>
-      <div class="m-3">
-        <p class="h5 text-secondary fw-bold">Target date</p>
-        <p class="h5">{{task.target_date}}</p>
-      </div>
+        <div class="my-3 me-3">
+          <p class="h5 text-secondary fw-bold">Created date</p>
+          <p class="h5">{{task.created_date}}</p>
+        </div>
+        <div class="m-3">
+          <p class="h5 text-secondary fw-bold">Target date</p>
+          <p class="h5">{{task.target_date}}</p>
+        </div>
       </div>
       <div class="my-3">
         <p class="h5 text-danger fw-bold">Status -</p>
