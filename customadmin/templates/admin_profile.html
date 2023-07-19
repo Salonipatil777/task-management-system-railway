@@ -110,7 +110,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Task Management System</title>
+    <title>Material Design for Bootstrap</title>
     <!-- Font Awesome -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -245,7 +245,7 @@
               {% if user.is_superuser %}
               <h3 class="m-b-0">{{user.username}}</h3>
               <p>Web Designer &amp; Developer</p>
-              <div class="row text-center m-t-20">
+              {% comment %} <div class="row text-center m-t-20">
                 <div class="col-lg-4 col-md-4 m-t-20">
                   <h3 class="m-b-0 font-light">1043</h3>
                   <small>Articles</small>
@@ -258,7 +258,7 @@
                   <h3 class="m-b-0 font-light">5454</h3>
                   <small>Following</small>
                 </div>
-              </div>
+              </div> {% endcomment %}
               {% endif %}
             </div>
           </div>
