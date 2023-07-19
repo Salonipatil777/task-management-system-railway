@@ -258,6 +258,8 @@ def update_employee(request,id):
         email = request.POST.get('email')
         password = request.POST.get('password')
         mobile = request.POST.get('mobile')
+        date_of_birth = request.POST.get('date_of_birth')
+        date_of_join = request.POST.get('date_of_join')
         post = request.POST.get('post')
         address = request.POST.get('address')
         blood_group = request.POST.get('blood_group')
@@ -294,7 +296,9 @@ def update_employee(request,id):
             post=post,
             address=address,
             image=image,
-            blood_group=blood_group,)
+            blood_group=blood_group,
+            date_of_birth = date_of_birth,
+            date_of_join = date_of_join,)
         employee.save()
         user.save()
         messages.success(request, "Employee update successfully")
