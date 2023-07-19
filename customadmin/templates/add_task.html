@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Task Management System</title>
+    <title>Material Design for Bootstrap</title>
     <!-- Font Awesome -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -132,6 +132,7 @@
             class="my-5 mx-lg-5 px-lg-5 mx-3"
             method="post"
             action="{% url 'add_task' %}"
+            enctype="multipart/form-data"
           >
             {% csrf_token %}
 
@@ -171,17 +172,34 @@
                 </div>
               </div>
             </div>
-            <div class="mb-4">
-              <mdb-form-control>
-                <label mdbLabel class="form-label" for="form1">Task</label>
-                <input
-                  mdbInput
-                  type="text"
-                  id="form1"
-                  class="form-control"
-                  name="given_task"
-                />
-              </mdb-form-control>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-4">
+                  <mdb-form-control>
+                    <label mdbLabel class="form-label" for="form1">Task</label>
+                    <input
+                      mdbInput
+                      type="text"
+                      id="form1"
+                      class="form-control"
+                      name="given_task"
+                    />
+                  </mdb-form-control>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-4">
+                  <mdb-form-control>
+                    <label mdbLabel class="form-label" for="form1">Image</label>
+                    <input
+                      type="file"
+                      id="form1Example2"
+                      class="form-control"
+                      name="image"
+                    />
+                  </mdb-form-control>
+                </div>
+              </div>
             </div>
 
             <div class="mb-4">
