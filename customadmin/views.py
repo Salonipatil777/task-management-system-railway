@@ -63,6 +63,8 @@ def add_task(request):
         created_date = request.POST.get('created_date')
         target_date = request.POST.get('target_date')
         status = request.POST.get('status')
+        image = request.FILES.get('image')
+
 
 
         user = get_object_or_404(User, email=assigned_to)
@@ -75,6 +77,7 @@ def add_task(request):
         target_date=target_date,
         status=status,
         employee_name=employee_name,
+        image=image,
         )
         task.save()
         messages.success(request, 'Task created successfully')
@@ -259,8 +262,6 @@ def update_employee(request,id):
         address = request.POST.get('address')
         blood_group = request.POST.get('blood_group')
         image = request.FILES.get('image')
-        date_of_join = request.POST.get('date_of_join')
-        date_of_birth = request.POST.get('date_of_birth')
 
 
         ctx = {
@@ -293,9 +294,7 @@ def update_employee(request,id):
             post=post,
             address=address,
             image=image,
-            blood_group=blood_group,
-            date_of_join = date_of_join,
-            date_of_birth = date_of_birth)
+            blood_group=blood_group,)
         employee.save()
         user.save()
         messages.success(request, "Employee update successfully")
