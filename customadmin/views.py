@@ -37,6 +37,7 @@ def admin_login(request):
         return render(request,'login.html')
     except Exception as e:
         print(e)
+        return render(request,'login.html')
 
         
 @login_required(login_url='admin_login')
