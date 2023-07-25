@@ -17,26 +17,27 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def admin_login(request):
     try:
-        # if request.user.is_authenticated:
-        #     return redirect('/admin/dashboard/')
         if request.method == 'POST':
-            username=request.POST.get('username')
-            password=request.POST.get('password')
-            user_obj=User.objects.filter(username=username)
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user_obj = User.objects.filter(username=username)
             if not user_obj.exists():
-                messages.info(request,'account not found')
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-            user_obj=authenticate(username=username, password=password)
+                messages.info(request, 'Account not found')
+                return redirect(request.META.get('HTTP_REFERER'))
+
+            user_obj = authenticate(username=username, password=password)
             if user_obj and user_obj.is_superuser:
                 login(request, user_obj)
-                messages.success(request,'admin login successfully')
-                return redirect('/admin/dashboard/')
-            message.info(request,'invalid password')
+                messages.success(request, 'Admin login successful')
+                return redirect(reverse('admin_dashboard'))  # Using reverse to get the URL
+            messages.info(request, 'Invalid password')
             return redirect('/')
-        return render(request,'login.html')
+        
+        return render(request, 'login.html')
+    
     except Exception as e:
         print(e)
-
+        
 @login_required(login_url='admin_login')
 def admin_logout(request):
     logout(request)
