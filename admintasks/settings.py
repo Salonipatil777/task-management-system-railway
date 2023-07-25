@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 import dj_database_url
 
-DATABASE_URL = 'postgres://postgres:d7R8y1uoCRvIwljjVfVQ@containers-us-west-10.railway.app:7375/railway'
+DATABASE_URL = 'postgresql://postgres:Et6zq7iaGVv34m9S0CNx@containers-us-west-131.railway.app:6998/railway'
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
