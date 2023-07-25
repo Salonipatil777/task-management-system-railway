@@ -47,9 +47,7 @@ class Room(models.Model):
     
 class Message(models.Model):
     value = models.CharField(max_length=1000000)
-    datetime = models.DateTimeField(default=datetime.now, blank=True)
-    date = models.DateField(auto_now_add=True, blank=True)
-    time = models.TimeField(auto_now=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True, blank=True)
     user = models.CharField(max_length=1000000)
     room = models.CharField(max_length=1000000)
 
