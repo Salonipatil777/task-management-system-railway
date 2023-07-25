@@ -36,7 +36,7 @@ def admin_login(request):
                 return redirect('/admin/dashboard/')
             
             messages.info(request, 'Invalid password')
-            return redirect('home')
+            return redirect('/')
 
         # For GET requests, simply render the login page
         return render(request, 'login.html')
